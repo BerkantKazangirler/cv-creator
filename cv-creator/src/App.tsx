@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { requestData } from "./utils/fetch-data";
+import type { OverviewI } from "./types/overview";
 
 export default function App() {
-  const [cardData, setCardData] = useState<Array<any>>([]);
+  const [cardData, setCardData] = useState<OverviewI>({} as OverviewI);
 
   useEffect(() => {
-    requestData<Array<any>>("/overview?username=berkant-kazangirler").then(
+    requestData<OverviewI>("/overview?username=berkant-kazangirler").then(
       (data) => {
         setCardData(data);
       }
