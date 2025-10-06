@@ -5,9 +5,11 @@ export default function App() {
   const [cardData, setCardData] = useState<Array<any>>([]);
 
   useEffect(() => {
-    requestData<Array<any>>("berkant-kazangirler").then((data) => {
-      setCardData(data);
-    });
+    requestData<Array<any>>("/overview?username=berkant-kazangirler").then(
+      (data) => {
+        setCardData(data);
+      }
+    );
   }, []);
 
   return (
