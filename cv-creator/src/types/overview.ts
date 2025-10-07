@@ -1,10 +1,17 @@
+interface CurrentPositionsI {
+  logoURL: string;
+  name: string;
+  url: string;
+  urn: string;
+}
+
+interface supportedLocalesI {
+  country: string;
+  language: string;
+}
+
 export interface OverviewI {
-  CurrentPositions: {
-    logoURL: string;
-    name: string;
-    url: string;
-    urn: string;
-  };
+  CurrentPositions: CurrentPositionsI[];
   backgroundImageURL: string;
   connectionsCount: number;
   creator: boolean;
@@ -30,9 +37,6 @@ export interface OverviewI {
   profilePictureURL: string;
   publicIdentifier: string;
   qualityProfile: boolean;
-  supportedLocales: {
-    country: string;
-    language: string;
-  };
+  supportedLocales: supportedLocalesI[];
   urn: string;
 }
