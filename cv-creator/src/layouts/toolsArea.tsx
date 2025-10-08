@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { AiOutlineLayout } from "react-icons/ai";
 import { FaCrown } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
@@ -9,8 +8,6 @@ import { MdWaterDrop } from "react-icons/md";
 import { RiChatSmile2Line } from "react-icons/ri";
 
 export const ToolsArea = () => {
-  const [selectedArea, setSelectedArea] = useState<string>("");
-
   return (
     <div className="h-fit flex flex-col w-40 rounded-sm drop-shadow-sm shadow-black bg-white">
       <div className="flex flex-row border-b py-2 border-slate-300 justify-between w-full">

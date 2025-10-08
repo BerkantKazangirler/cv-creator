@@ -1,27 +1,9 @@
-import { useEffect, useState } from "react";
-import { requestData } from "./utils/fetch-data";
-import type { OverviewI } from "./types/overview";
-import type { SkillsI } from "./types/skills";
-import type { certificationsI } from "./types/certifications";
-import type { experienceI } from "./types/experience";
-import type { detailsI } from "./types/details";
+import { HeaderSection } from "./components/sections/header";
+import { LanguagesSection } from "./components/sections/languages";
+import { SummarySection } from "./components/sections/sumarry";
 import { ToolsArea } from "./layouts/toolsArea";
 
 export default function App() {
-  const [detailData, setDetailData] = useState<detailsI>({} as detailsI);
-  const [overviewData, setOverviewData] = useState<OverviewI>({} as OverviewI);
-  const [skillsData, setSkillsData] = useState<SkillsI>({} as SkillsI);
-  const [certificationsData, setCertificationsData] = useState<certificationsI>(
-    {} as certificationsI
-  );
-  const [experienceData, setExperienceData] = useState<experienceI>(
-    {} as experienceI
-  );
-  const [profileUrn, setProfileUrn] = useState<string | null>(null);
-  const [profileName, setProfileName] = useState<string>("berkant-kazangirler");
-
-  const [showBrand, setShowBrand] = useState<boolean>(false);
-
   // useEffect(() => {
   //   requestData<OverviewI>(`/overview?username=${profileName}`).then((data) => {
   //     setOverviewData(data);
@@ -57,7 +39,13 @@ export default function App() {
       <div className="flex flex-row h-full">
         <ToolsArea />
         <div className="flex flex-col h-full w-full items-center">
-          <div className="bg-white w-940 h-full">asd</div>
+          <div className="bg-white p-27 w-940 h-full flex flex-col">
+            <HeaderSection />
+            <div className="grid grid-cols-[1.3fr_1fr] gap-3">
+              <SummarySection />
+              <LanguagesSection />
+            </div>
+          </div>
         </div>
       </div>
     </div>
