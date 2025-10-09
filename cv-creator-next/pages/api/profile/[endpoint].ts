@@ -5,7 +5,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const apiKey = process.env.LINKDAPI_API_KEY;
-  const baseUrl = process.env.NEXT_BASE_URL; // örn: https://linkdapi.com/api/v1/profile
+  const baseUrl = process.env.NEXT_BASE_URL;
 
   if (!apiKey || !baseUrl) {
     return res.status(500).json({
@@ -14,19 +14,16 @@ export default async function handler(
     });
   }
 
-  // URL parametresi (örnek: details)
   const { endpoint, ...query } = req.query;
 
   if (!endpoint) {
     return res.status(400).json({ error: "Missing 'endpoint' parameter" });
   }
 
-  // Query parametrelerini düzgün oluştur
   const queryString = new URLSearchParams(
     query as Record<string, string>
   ).toString();
 
-  // Tam hedef URL
   const targetUrl = `${baseUrl}/${endpoint}${
     queryString ? `?${queryString}` : ""
   }`;

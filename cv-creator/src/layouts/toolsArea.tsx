@@ -9,7 +9,7 @@ import { RiChatSmile2Line } from "react-icons/ri";
 
 export const ToolsArea = () => {
   return (
-    <div className="h-fit flex flex-col w-40 rounded-sm drop-shadow-sm shadow-black bg-white">
+    <div className="h-fit sticky top-6 flex flex-col w-40 rounded-sm drop-shadow-sm shadow-black bg-white">
       <div className="flex flex-row border-b py-2 border-slate-300 justify-between w-full">
         <button
           title="Repo"

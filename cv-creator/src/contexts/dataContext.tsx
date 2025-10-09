@@ -278,7 +278,7 @@ export const DataProvider = ({ children }: { children: React.ReactNode }) => {
           present: true,
           period: "1 yr 5 mos",
         },
-        isMultiPositions: true,
+        isMultiPositions: false,
         totalDuration: "",
       },
       {
