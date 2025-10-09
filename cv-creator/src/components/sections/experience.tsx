@@ -1,4 +1,4 @@
-import { useDataContext } from "@/contexts/dataContext";
+import { useDataContext } from "@/contexts";
 import classNames from "classnames";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";

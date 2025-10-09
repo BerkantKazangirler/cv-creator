@@ -1,4 +1,4 @@
-import { useDataContext } from "@/contexts/dataContext";
+import { useDataContext } from "@/contexts";
 import { useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 

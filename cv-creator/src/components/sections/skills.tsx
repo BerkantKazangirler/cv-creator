@@ -1,4 +1,4 @@
-import { useDataContext } from "@/contexts/dataContext";
+import { useDataContext } from "@/contexts";
 import classNames from "classnames";
 
 export const SkillsSection = () => {

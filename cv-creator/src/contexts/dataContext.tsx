@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import type { OverviewI } from "../types/overview";
-import type { SkillsI } from "../types/skills";
-import type { certificationsI } from "../types/certifications";
-import type { experienceI } from "../types/experience";
-import type { detailsI } from "../types/details";
+import type {
+  OverviewI,
+  SkillsI,
+  experienceI,
+  certificationsI,
+  detailsI,
+} from "@/types";
 
 type DataContextType = {
   detailData: detailsI;

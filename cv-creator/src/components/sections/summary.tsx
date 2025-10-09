@@ -1,4 +1,4 @@
-import { useDataContext } from "@/contexts/dataContext";
+import { useDataContext } from "@/contexts";
 
 export const SummarySection = () => {
   const { detailData } = useDataContext();
