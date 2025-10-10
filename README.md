@@ -162,11 +162,7 @@ Bu yapı sayesinde:
 
 ### CV Şablonlarını Değiştirme
 
-`frontend/src/components/templates/` klasöründeki şablon dosyalarını düzenleyerek kendi tasarımınızı oluşturabilirsiniz.
-
-### Tema Renkleri
-
-`frontend/src/styles/` klasöründeki CSS dosyalarını düzenleyerek tema renklerini özelleştirebilirsiniz.
+`frontend/src/components/sections/` klasöründeki şablon dosyalarını düzenleyerek kendi tasarımınızı oluşturabilirsiniz.
 
 ## 🐛 Sorun Giderme
 

@@ -15,7 +15,6 @@ interface summaryStyles {
   italic: boolean;
   bold: boolean;
   align: "left" | "center" | "right";
-  link?: string;
 }
 
 interface experienceStyles {
@@ -104,10 +103,10 @@ export const StyleProvider = ({ children }: { children: React.ReactNode }) => {
   });
   const [summaryStyles, setSummaryStyles] = useState<summaryStyles>({
     title: "Summary",
-    underline: false,
-    italic: false,
-    bold: false,
-    align: "left",
+    underline: true,
+    italic: true,
+    bold: true,
+    align: "center",
   });
 
   const [experienceStyles, setExperienceStyles] = useState<
