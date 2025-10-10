@@ -36,6 +36,13 @@ interface educationStles {
   showInstitutionLogo: boolean;
 }
 
+interface languagesStyles {
+  title: string;
+  showSlider: boolean;
+  showProficiency: boolean;
+  sliderStyle: "dots" | "slider" | "lines" | "thin" | "hazard";
+}
+
 type StylesContextType = {
   headerStyles: headerStyles;
   setHeaderStyles: React.Dispatch<React.SetStateAction<headerStyles>>;
@@ -67,6 +74,8 @@ type StylesContextType = {
   >;
   skillsStyles: { title: string };
   setSkillsStyles: React.Dispatch<React.SetStateAction<{ title: string }>>;
+  languagesStyles: languagesStyles;
+  setLanguagesStyles: React.Dispatch<React.SetStateAction<languagesStyles>>;
 };
 
 const StylesContext = createContext<StylesContextType>({
@@ -88,6 +97,8 @@ const StylesContext = createContext<StylesContextType>({
   setEducationGlobalStyles: () => {},
   skillsStyles: { title: "Skills" },
   setSkillsStyles: () => {},
+  languagesStyles: {} as languagesStyles,
+  setLanguagesStyles: () => {},
 });
 
 export const useStylesContext = () => useContext(StylesContext);
@@ -100,6 +111,12 @@ export const StyleProvider = ({ children }: { children: React.ReactNode }) => {
     uppercaseName: false,
     showPhoto: false,
     photoStyle: "FULL",
+  });
+  const [languagesStyles, setLanguagesStyles] = useState<languagesStyles>({
+    title: "Languages",
+    showSlider: true,
+    showProficiency: true,
+    sliderStyle: "slider",
   });
   const [summaryStyles, setSummaryStyles] = useState<summaryStyles>({
     title: "Summary",
@@ -197,6 +214,9 @@ export const StyleProvider = ({ children }: { children: React.ReactNode }) => {
 
         skillsStyles,
         setSkillsStyles,
+
+        languagesStyles,
+        setLanguagesStyles,
       }}
     >
       {children}
