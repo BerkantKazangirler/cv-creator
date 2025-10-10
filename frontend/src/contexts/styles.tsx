@@ -40,7 +40,7 @@ interface languagesStyles {
   title: string;
   showSlider: boolean;
   showProficiency: boolean;
-  sliderStyle: "dots" | "slider" | "lines" | "thin" | "hazard";
+  sliderStyle: "dots" | "slider" | "lines" | "thin";
 }
 
 type StylesContextType = {
@@ -116,7 +116,7 @@ export const StyleProvider = ({ children }: { children: React.ReactNode }) => {
     title: "Languages",
     showSlider: true,
     showProficiency: true,
-    sliderStyle: "slider",
+    sliderStyle: "lines",
   });
   const [summaryStyles, setSummaryStyles] = useState<summaryStyles>({
     title: "Summary",

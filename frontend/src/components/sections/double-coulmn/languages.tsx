@@ -66,20 +66,27 @@ export const LanguagesSection = ({ pageRef }: languageProps) => {
             className={classNames("p-1 w-full flex flex-row justify-between", {
               "border-b border-opacity-30 border-dashed py-1 border-double-about":
                 index - 1,
+              "flex-col": languagesStyles?.sliderStyle == "thin",
             })}
           >
             <div
               className={classNames("flex w-full py-1 gap-1", {
-                "flex-col": languagesStyles?.showSlider,
+                "flex-col":
+                  languagesStyles?.showSlider &&
+                  languagesStyles?.sliderStyle != "thin",
+                "flex-row justify-between":
+                  languagesStyles?.showSlider &&
+                  languagesStyles?.sliderStyle == "thin",
                 "flex-row justify-between items-center":
-                  !languagesStyles?.showSlider,
+                  !languagesStyles?.showSlider &&
+                  languagesStyles?.sliderStyle != "thin",
               })}
             >
               <span className="text-sm w-fit font-medium text-double-primary-black leading-3 font-inter">
                 {data.Language}
               </span>
               {languagesStyles?.showProficiency && (
-                <span className="text-2sm text-double-about leading-3 font-inter">
+                <span className="text-2sm w-fit text-double-about leading-3 font-inter">
                   {data.Level}
                 </span>
               )}
@@ -103,10 +110,50 @@ export const LanguagesSection = ({ pageRef }: languageProps) => {
                       ></div>
                     ))}
                   </>
+                ) : languagesStyles?.sliderStyle === "slider" ? (
+                  <div
+                    className="w-32 cursor-pointer"
+                    onClick={(e: MouseEvent<HTMLDivElement>) => {
+                      const target = e.currentTarget as HTMLElement;
+                      const rect = target.getBoundingClientRect();
+                      const x = (e as MouseEvent).clientX - rect.left;
+                      const ratio = rect.width > 0 ? x / rect.width : 0;
+                      let level = Math.ceil(ratio * 5);
+                      if (level < 1) level = 1;
+                      if (level > 5) level = 5;
+                      changeLevel(level, data.Language);
+                    }}
+                  >
+                    <div className="w-full bg-slate-200 rounded-full h-3.5">
+                      <div
+                        className="bg-double-main-blue h-3.5 rounded-full"
+                        style={{
+                          width: `${((levels[data.Level] ?? 0) / 5) * 100}%`,
+                        }}
+                      ></div>
+                    </div>
+                  </div>
+                ) : languagesStyles?.sliderStyle === "lines" ? (
+                  <>
+                    {[...Array(5)].map((_, i) => (
+                      <div
+                        key={i}
+                        onClick={() => changeLevel(i + 1, data.Language)}
+                        className={classNames(
+                          "rounded-full w-2 h-8 cursor-pointer",
+                          {
+                            "bg-double-main-blue":
+                              i < (levels[data.Level] ?? 0),
+                            "bg-double-grey": i >= (levels[data.Level] ?? 0),
+                          }
+                        )}
+                      ></div>
+                    ))}
+                  </>
                 ) : (
-                  languagesStyles?.sliderStyle === "slider" && (
+                  languagesStyles?.sliderStyle === "thin" && (
                     <div
-                      className="w-32 cursor-pointer"
+                      className="w-full cursor-pointer"
                       onClick={(e: MouseEvent<HTMLDivElement>) => {
                         const target = e.currentTarget as HTMLElement;
                         const rect = target.getBoundingClientRect();
@@ -118,9 +165,9 @@ export const LanguagesSection = ({ pageRef }: languageProps) => {
                         changeLevel(level, data.Language);
                       }}
                     >
-                      <div className="w-full bg-slate-200 rounded-full h-3.5">
+                      <div className="w-full bg-slate-200 rounded-full h-2">
                         <div
-                          className="bg-double-main-blue h-3.5 rounded-full"
+                          className="bg-double-main-blue h-2 rounded-full"
                           style={{
                             width: `${((levels[data.Level] ?? 0) / 5) * 100}%`,
                           }}
