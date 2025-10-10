@@ -18,7 +18,6 @@ Modern ve kullanıcı dostu bir CV oluşturma uygulaması. LinkedIn profillerind
 - React
 - Vite
 - Tailwind CSS / CSS Modules
-- Axios (API istekleri için)
 
 ### Backend (Next.js)
 
