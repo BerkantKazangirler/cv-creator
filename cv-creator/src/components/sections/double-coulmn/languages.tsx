@@ -6,7 +6,8 @@ interface languageProps {
 }
 
 export const LanguagesSection = ({ pageRef }: languageProps) => {
-  const { detailData, setSelectedArea, selectedArea } = useDataContext();
+  const { detailData, setSelectedArea, selectedArea, setDetailData } =
+    useDataContext();
 
   const levels: Record<string, number> = {
     "Elementary proficiency": 1,
@@ -15,6 +16,20 @@ export const LanguagesSection = ({ pageRef }: languageProps) => {
     "Full professional proficiency": 4,
     "Native or bilingual proficiency": 5,
   };
+
+  function changeLevel(level: number, languageIndex: string) {
+    const newDetailData = { ...detailData };
+    if (!newDetailData?.languages) return;
+    const langIndex = newDetailData.languages.languages.findIndex(
+      (lang) => lang.Language === languageIndex
+    );
+    const levelKey = Object.keys(levels).find(
+      (key) => levels[key] === level + 1
+    );
+    if (!levelKey) return;
+    newDetailData.languages.languages[langIndex].Level = levelKey;
+    setDetailData(newDetailData);
+  }
 
   return (
     <div
@@ -52,6 +67,7 @@ export const LanguagesSection = ({ pageRef }: languageProps) => {
               {[...Array(5)].map((_, i) => (
                 <div
                   key={i}
+                  onClick={() => changeLevel(i, data.Language)}
                   className={classNames("rounded-full size-4", {
                     "bg-double-main-blue": i < (levels[data.Level] ?? 0),
                     "bg-double-grey": i >= (levels[data.Level] ?? 0),

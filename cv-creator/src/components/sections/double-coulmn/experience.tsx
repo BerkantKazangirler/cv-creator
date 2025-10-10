@@ -27,7 +27,7 @@ export const ExperienceSection = ({ pageRef }: experienceProps) => {
       </span>
       <div className="flex flex-col">
         {experienceData?.map((data, index) => (
-          <>
+          <div key={index}>
             {data.isMultiPositions ? (
               <>
                 {data.positions?.map((positionData, posIndex) => (
@@ -119,7 +119,7 @@ export const ExperienceSection = ({ pageRef }: experienceProps) => {
                 </div>
               </div>
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>

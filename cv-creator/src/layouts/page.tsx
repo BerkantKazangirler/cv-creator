@@ -7,7 +7,7 @@ import {
   SkillsSection,
   SummarySection,
 } from "@/components";
-import { useDataContext } from "@/contexts/dataContext";
+import { useDataContext } from "@/contexts/data";
 import { useEffect, useRef } from "react";
 
 export const PageLayout = () => {
