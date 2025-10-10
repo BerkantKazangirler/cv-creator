@@ -1,8 +1,12 @@
 import { useDataContext } from "@/contexts";
 import classNames from "classnames";
 
-export const LanguagesSection = () => {
-  const { detailData } = useDataContext();
+interface languageProps {
+  pageRef?: React.RefObject<HTMLDivElement | null>;
+}
+
+export const LanguagesSection = ({ pageRef }: languageProps) => {
+  const { detailData, setSelectedArea, selectedArea } = useDataContext();
 
   const levels: Record<string, number> = {
     "Elementary proficiency": 1,
@@ -13,7 +17,17 @@ export const LanguagesSection = () => {
   };
 
   return (
-    <div className="flex flex-col">
+    <div
+      className={classNames(
+        "flex transition-all duration-500 cursor-pointer border border-dashed p-1 flex-col",
+        {
+          "border-black rounded-md": selectedArea === "languages",
+          "border-transparent": selectedArea !== "languages",
+        }
+      )}
+      ref={pageRef}
+      onClick={() => setSelectedArea("languages")}
+    >
       <span className="text-double-primary-black font-rubik uppercase font-medium text-xl border-b-3 border-double-primary-black w-full">
         languages
       </span>

@@ -1,9 +1,14 @@
 import { useDataContext } from "@/contexts";
+import classNames from "classnames";
 import { useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 
-export const HeaderSection = () => {
-  const { overviewData } = useDataContext();
+interface headerProps {
+  pageRef?: React.RefObject<HTMLDivElement | null>;
+}
+
+export const HeaderSection = ({ pageRef }: headerProps) => {
+  const { overviewData, selectedArea, setSelectedArea } = useDataContext();
 
   const [headerStyles, setHeaderStyles] = useState<{
     showTitle: boolean;
@@ -34,7 +39,17 @@ export const HeaderSection = () => {
   });
 
   return (
-    <div className="flex flex-row w-full justify-between">
+    <div
+      ref={pageRef}
+      onClick={() => setSelectedArea("header")}
+      className={classNames(
+        "flex transition-all w-full justify-between duration-500 cursor-pointer border border-dashed p-1 flex-row",
+        {
+          "border-black rounded-md": selectedArea === "header",
+          "border-transparent": selectedArea !== "header",
+        }
+      )}
+    >
       <div className="flex flex-col pr-20">
         <p className="font-rubik pb-0.5 text-4xl text-primary-black uppercase font-medium">
           {overviewData?.fullName}

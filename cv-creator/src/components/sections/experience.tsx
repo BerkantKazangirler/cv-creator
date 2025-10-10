@@ -3,11 +3,25 @@ import classNames from "classnames";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 
-export const ExperienceSection = () => {
-  const { experienceData } = useDataContext();
+interface experienceProps {
+  pageRef?: React.RefObject<HTMLDivElement | null>;
+}
+
+export const ExperienceSection = ({ pageRef }: experienceProps) => {
+  const { experienceData, setSelectedArea, selectedArea } = useDataContext();
 
   return (
-    <div className="flex flex-col">
+    <div
+      ref={pageRef}
+      onClick={() => setSelectedArea("experience")}
+      className={classNames(
+        "flex transition-all duration-500 cursor-pointer border border-dashed p-1 flex-col",
+        {
+          "border-black rounded-md": selectedArea === "experience",
+          "border-transparent": selectedArea !== "experience",
+        }
+      )}
+    >
       <span className="text-double-primary-black font-rubik uppercase font-medium text-xl border-b-3 border-double-primary-black w-full">
         experience
       </span>

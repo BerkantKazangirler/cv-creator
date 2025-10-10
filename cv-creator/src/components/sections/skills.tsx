@@ -1,10 +1,25 @@
 import { useDataContext } from "@/contexts";
 import classNames from "classnames";
 
-export const SkillsSection = () => {
-  const { skillsData } = useDataContext();
+interface skillsProps {
+  pageRef?: React.RefObject<HTMLDivElement | null>;
+}
+
+export const SkillsSection = ({ pageRef }: skillsProps) => {
+  const { skillsData, setSelectedArea, selectedArea } = useDataContext();
+
   return (
-    <div className="flex flex-col">
+    <div
+      ref={pageRef}
+      onClick={() => setSelectedArea("skills")}
+      className={classNames(
+        "flex transition-all duration-500 cursor-pointer border border-dashed p-1 flex-col",
+        {
+          "border-black rounded-md": selectedArea === "skills",
+          "border-transparent": selectedArea !== "skills",
+        }
+      )}
+    >
       <span className="text-double-primary-black font-rubik uppercase font-medium text-xl border-b-3 border-double-primary-black w-full">
         skills
       </span>

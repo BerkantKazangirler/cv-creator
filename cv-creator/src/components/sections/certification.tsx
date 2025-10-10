@@ -1,11 +1,26 @@
 import { useDataContext } from "@/contexts";
 import classNames from "classnames";
 
-export const CertificationSection = () => {
-  const { certificationsData } = useDataContext();
+interface certificationProps {
+  pageRef?: React.RefObject<HTMLDivElement | null>;
+}
+
+export const CertificationSection = ({ pageRef }: certificationProps) => {
+  const { certificationsData, setSelectedArea, selectedArea } =
+    useDataContext();
 
   return (
-    <div className="flex flex-col">
+    <div
+      ref={pageRef}
+      onClick={() => setSelectedArea("certification")}
+      className={classNames(
+        "flex transition-all duration-500 cursor-pointer border border-dashed p-1 flex-col",
+        {
+          "border-black rounded-md": selectedArea === "certification",
+          "border-transparent": selectedArea !== "certification",
+        }
+      )}
+    >
       <span className="text-double-primary-black font-rubik uppercase font-medium text-xl border-b-3 border-double-primary-black w-full">
         certification
       </span>
