@@ -214,7 +214,3 @@ Projeyi beğendiyseniz yıldız vermeyi unutmayın!
 ## 📞 İletişim
 
 Sorularınız veya önerileriniz için issue açabilirsiniz.
-
----
-
-Made with ❤️ by Berkant Kazangirler
