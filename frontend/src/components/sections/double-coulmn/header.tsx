@@ -16,7 +16,7 @@ export const HeaderSection = ({ pageRef }: headerProps) => {
       className={classNames(
         "flex transition-all w-full justify-between duration-500 cursor-pointer border border-dashed p-1 flex-row",
         {
-          "border-black rounded-md": selectedArea === "header",
+          "border-black rounded-md  ": selectedArea === "header",
           "border-transparent": selectedArea !== "header",
         }
       )}

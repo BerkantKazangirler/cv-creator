@@ -32,8 +32,6 @@ export const LanguagesSection = ({ pageRef }: languageProps) => {
     setDetailData(newDetailData);
   }
 
-  // Progress click logic is now inlined where the slider UI is rendered.
-
   return (
     <div
       className={classNames(
@@ -57,7 +55,12 @@ export const LanguagesSection = ({ pageRef }: languageProps) => {
             title: e.target.value,
           })
         }
-        className="w-full text-double-primary-black uppercase font-rubik font-medium text-xl border-b-3 border-double-primary-black bg-transparent focus:outline-none"
+        className={classNames(
+          "w-full text-double-primary-black uppercase font-rubik font-medium text-xl border-b-3 border-double-primary-black bg-transparent focus:outline-none",
+          {
+            "text-opacity-50": selectedArea === "languages",
+          }
+        )}
       />
       <div className="flex flex-col">
         {detailData?.languages?.languages?.map((data, index) => (

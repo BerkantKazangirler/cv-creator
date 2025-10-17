@@ -1,4 +1,4 @@
-import { useDataContext } from "@/contexts";
+import { useDataContext, useStylesContext } from "@/contexts";
 import classNames from "classnames";
 import { FaCalendarAlt } from "react-icons/fa";
 
@@ -8,6 +8,8 @@ interface educationProps {
 
 export const EducationSection = ({ pageRef }: educationProps) => {
   const { detailData, selectedArea, setSelectedArea } = useDataContext();
+  const { educationGlobalStyles, setEducationGlobalStyles } =
+    useStylesContext();
 
   return (
     <div
@@ -21,9 +23,24 @@ export const EducationSection = ({ pageRef }: educationProps) => {
         }
       )}
     >
-      <span className="text-double-primary-black font-rubik uppercase font-medium text-xl border-b-3 border-double-primary-black w-full">
-        education
-      </span>
+      <input
+        type="text"
+        readOnly={selectedArea !== "education"}
+        value={educationGlobalStyles  ?.title}
+        maxLength={20}
+        onChange={(e) =>
+          setEducationGlobalStyles({
+            ...educationGlobalStyles,
+            title: e.target.value,
+          })
+        }
+        className={classNames(
+          "w-full text-double-primary-black uppercase font-rubik font-medium text-xl border-b-3 border-double-primary-black bg-transparent focus:outline-none",
+          {
+            "text-opacity-50": selectedArea === "education",
+          }
+        )}
+      />
       <div className="flex flex-col">
         {detailData?.education?.map((data, index) => (
           <div

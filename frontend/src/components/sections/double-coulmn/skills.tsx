@@ -1,4 +1,4 @@
-import { useDataContext } from "@/contexts";
+import { useDataContext, useStylesContext } from "@/contexts";
 import classNames from "classnames";
 
 interface skillsProps {
@@ -7,6 +7,7 @@ interface skillsProps {
 
 export const SkillsSection = ({ pageRef }: skillsProps) => {
   const { skillsData, setSelectedArea, selectedArea } = useDataContext();
+  const { skillsStyles, setSkillsStyles } = useStylesContext();
 
   return (
     <div
@@ -20,9 +21,24 @@ export const SkillsSection = ({ pageRef }: skillsProps) => {
         }
       )}
     >
-      <span className="text-double-primary-black font-rubik uppercase font-medium text-xl border-b-3 border-double-primary-black w-full">
-        skills
-      </span>
+      <input
+        type="text"
+        readOnly={selectedArea !== "skills"}
+        value={skillsStyles?.title}
+        maxLength={30}
+        onChange={(e) =>
+          setSkillsStyles({
+            ...skillsStyles,
+            title: e.target.value,
+          })
+        }
+        className={classNames(
+          "w-full text-double-primary-black transition-all uppercase font-rubik font-medium text-xl border-b-3 border-double-primary-black bg-transparent focus:outline-none",
+          {
+            "text-opacity-50": selectedArea === "skills",
+          }
+        )}
+      />
       <div className="flex flex-col">
         {skillsData.map((data, index) => (
           <div

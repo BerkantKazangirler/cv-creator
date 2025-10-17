@@ -1,4 +1,4 @@
-import { useDataContext } from "@/contexts";
+import { useDataContext, useStylesContext } from "@/contexts";
 import classNames from "classnames";
 import { FaCalendarAlt } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
@@ -9,6 +9,8 @@ interface experienceProps {
 
 export const ExperienceSection = ({ pageRef }: experienceProps) => {
   const { experienceData, setSelectedArea, selectedArea } = useDataContext();
+  const { setExperienceGlobalStyles, experienceGlobalStyles } =
+    useStylesContext();
 
   return (
     <div
@@ -22,9 +24,24 @@ export const ExperienceSection = ({ pageRef }: experienceProps) => {
         }
       )}
     >
-      <span className="text-double-primary-black font-rubik uppercase font-medium text-xl border-b-3 border-double-primary-black w-full">
-        experience
-      </span>
+      <input
+        type="text"
+        readOnly={selectedArea !== "experience"}
+        value={experienceGlobalStyles?.title}
+        maxLength={20}
+        onChange={(e) =>
+          setExperienceGlobalStyles({
+            ...experienceGlobalStyles,
+            title: e.target.value,
+          })
+        }
+        className={classNames(
+          "w-full text-double-primary-black uppercase font-rubik font-medium text-xl border-b-3 border-double-primary-black bg-transparent focus:outline-none",
+          {
+            "text-opacity-50": selectedArea === "experience",
+          }
+        )}
+      />
       <div className="flex flex-col">
         {experienceData?.map((data, index) => (
           <div key={index}>

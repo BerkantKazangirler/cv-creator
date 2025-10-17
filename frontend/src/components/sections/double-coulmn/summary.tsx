@@ -43,6 +43,7 @@ export const SummarySection = ({ pageRef }: summaryProps) => {
             "text-right": summaryStyles.align === "right",
             "font-bold": summaryStyles.bold,
             "font-medium": !summaryStyles.bold,
+            "text-opacity-50": selectedArea === "summary",
           }
         )}
       />
