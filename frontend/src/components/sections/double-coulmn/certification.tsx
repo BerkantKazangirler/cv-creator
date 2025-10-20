@@ -1,4 +1,4 @@
-import { useDataContext } from "@/contexts";
+import { useDataContext, useStylesContext } from "@/contexts";
 import classNames from "classnames";
 
 interface certificationProps {
@@ -8,6 +8,9 @@ interface certificationProps {
 export const CertificationSection = ({ pageRef }: certificationProps) => {
   const { certificationsData, setSelectedArea, selectedArea, load } =
     useDataContext();
+
+  const { certificationsGlobalStyles, setCertificationsGlobalStyles } =
+    useStylesContext();
 
   return (
     <div
@@ -20,9 +23,25 @@ export const CertificationSection = ({ pageRef }: certificationProps) => {
         "border-transparent": selectedArea !== "certification",
       })}
     >
-      <span className="text-double-primary-black font-rubik uppercase font-medium text-xl border-b-3 border-double-primary-black w-full">
-        certification
-      </span>
+      <input
+        type="text"
+        readOnly={selectedArea !== "certification" || !load}
+        value={load ? certificationsGlobalStyles.title : "Certification"}
+        maxLength={20}
+        onChange={(e) =>
+          setCertificationsGlobalStyles({
+            ...certificationsGlobalStyles,
+            title: e.target.value,
+          })
+        }
+        className={classNames(
+          "w-full text-double-primary-black uppercase font-rubik font-medium text-xl border-b-3 border-double-primary-black bg-transparent focus:outline-none",
+          {
+            "cursor-not-allowed": !load,
+            "text-opacity-50": selectedArea === "certification",
+          }
+        )}
+      />
       <div className="flex flex-col">
         {load ? (
           certificationsData?.map((data, index) => (
