@@ -6,26 +6,24 @@ interface summaryProps {
 }
 
 export const SummarySection = ({ pageRef }: summaryProps) => {
-  const { detailData, selectedArea, setSelectedArea } = useDataContext();
+  const { detailData, selectedArea, setSelectedArea, load } = useDataContext();
   const { summaryStyles, setSummaryStyles } = useStylesContext();
 
   return (
     <div
-      ref={pageRef}
-      draggable
+      ref={load ? pageRef : null}
       onClick={() => setSelectedArea("summary")}
-      className={classNames(
-        "flex transition-all duration-500 cursor-pointer border border-dashed p-1 flex-col",
-        {
-          "border-black rounded-md": selectedArea === "summary",
-          "border-transparent": selectedArea !== "summary",
-        }
-      )}
+      className={classNames("flex transition-all duration-500 p-1 flex-col", {
+        "animate-pulse select-none cursor-not-allowed": !load,
+        "border border-dashed cursor-pointer": load,
+        "border-black rounded-md": selectedArea === "summary",
+        "border-transparent": selectedArea !== "summary",
+      })}
     >
       <input
         type="text"
-        readOnly={selectedArea !== "summary"}
-        value={summaryStyles?.title}
+        readOnly={selectedArea !== "summary" || !load}
+        value={load ? summaryStyles?.title : "Summary"}
         maxLength={30}
         onChange={(e) =>
           setSummaryStyles({
@@ -36,6 +34,7 @@ export const SummarySection = ({ pageRef }: summaryProps) => {
         className={classNames(
           "w-full text-double-primary-black font-rubik font-medium text-xl border-b-3 border-double-primary-black bg-transparent focus:outline-none",
           {
+            "cursor-not-allowed": !load,
             uppercase: summaryStyles.underline,
             italic: summaryStyles.italic,
             "text-center": summaryStyles.align === "center",
@@ -49,7 +48,7 @@ export const SummarySection = ({ pageRef }: summaryProps) => {
       />
 
       <p className="text-2sm leading-4 py-1 text-double-about font-inter">
-        {detailData?.about}
+        {load ? detailData?.about : "Summary about yourself..."}
       </p>
     </div>
   );

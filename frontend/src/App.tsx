@@ -1,36 +1,58 @@
 import { ToolsArea } from "@/components";
 import { PageLayout } from "@/layouts";
+import { useEffect } from "react";
+import { requestData } from "./utils";
+import type {
+  certificationsI,
+  detailsI,
+  experienceI,
+  OverviewI,
+  SkillsI,
+} from "./types";
+import { useDataContext } from "./contexts";
 
 export default function App() {
-  // useEffect(() => {
-  //   requestData<OverviewI>(`/overview?username=${profileName}`).then((data) => {
-  //     setOverviewData(data);
-  //     setProfileUrn(data?.urn);
-  //   });
-  // }, []);
+  const {
+    setOverviewData,
+    setProfileUrn,
+    profileUrn,
+    setDetailData,
+    setSkillsData,
+    setCertificationsData,
+    setExperienceData,
+    setLoad,
+    load,
+  } = useDataContext();
 
-  // useEffect(() => {
-  //   if (profileUrn) return;
-  //   requestData<detailsI>(`/details?urn=${profileUrn}`).then((data) => {
-  //     setDetailData(data);
-  //   });
+  useEffect(() => {
+    requestData<OverviewI>("overview").then((data) => {
+      setOverviewData(data);
+      setProfileUrn(data?.urn);
+    });
+  }, []);
 
-  //   requestData<SkillsI>(`/skills?urn=${profileUrn}`).then((data) => {
-  //     setSkillsData(data);
-  //   });
+  useEffect(() => {
+    if (profileUrn) return;
+    requestData<detailsI>("details").then((data) => {
+      setDetailData(data);
+    });
 
-  //   requestData<certificationsI>(`/certifications?urn=${profileUrn}`).then(
-  //     (data) => {
-  //       setCertificationsData(data);
-  //     }
-  //   );
+    requestData<SkillsI>("skills").then((data) => {
+      setSkillsData(data);
+    });
 
-  //   requestData<experienceI>(`/full-experience?urn=${profileUrn}`).then(
-  //     (data) => {
-  //       setExperienceData(data);
-  //     }
-  //   );
-  // }, [profileUrn]);
+    requestData<certificationsI>("certifications").then((data) => {
+      setCertificationsData(data);
+    });
+
+    requestData<experienceI>("experience")
+      .then((data) => {
+        setExperienceData(data);
+      })
+      .finally(() => {
+        setLoad(true);
+      });
+  }, [profileUrn]);
 
   return (
     <div className="w-full flex-row py-6 px-4 h-full bg-slate-200">

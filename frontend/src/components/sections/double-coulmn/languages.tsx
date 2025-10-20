@@ -7,7 +7,7 @@ interface languageProps {
 }
 
 export const LanguagesSection = ({ pageRef }: languageProps) => {
-  const { detailData, setSelectedArea, selectedArea, setDetailData } =
+  const { detailData, setSelectedArea, selectedArea, setDetailData, load } =
     useDataContext();
 
   const { languagesStyles, setLanguagesStyles } = useStylesContext();
@@ -34,20 +34,19 @@ export const LanguagesSection = ({ pageRef }: languageProps) => {
 
   return (
     <div
-      className={classNames(
-        "flex transition-all duration-500 cursor-pointer border border-dashed p-1 flex-col",
-        {
-          "border-black rounded-md": selectedArea === "languages",
-          "border-transparent": selectedArea !== "languages",
-        }
-      )}
-      ref={pageRef}
-      onClick={() => setSelectedArea("languages")}
+      className={classNames("flex transition-all duration-500 p-1 flex-col", {
+        "animate-pulse select-none cursor-not-allowed": !load,
+        "border border-dashed cursor-pointer": load,
+        "border-black rounded-md": selectedArea === "languages",
+        "border-transparent": selectedArea !== "languages",
+      })}
+      ref={load ? pageRef : null}
+      onClick={() => (load ? setSelectedArea("languages") : null)}
     >
       <input
         type="text"
-        readOnly={selectedArea !== "languages"}
-        value={languagesStyles?.title}
+        readOnly={selectedArea !== "languages" || !load}
+        value={load ? languagesStyles?.title : "Languages"}
         maxLength={20}
         onChange={(e) =>
           setLanguagesStyles({
@@ -58,6 +57,7 @@ export const LanguagesSection = ({ pageRef }: languageProps) => {
         className={classNames(
           "w-full text-double-primary-black uppercase font-rubik font-medium text-xl border-b-3 border-double-primary-black bg-transparent focus:outline-none",
           {
+            "cursor-not-allowed": !load,
             "text-opacity-50": selectedArea === "languages",
           }
         )}

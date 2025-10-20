@@ -3,5 +3,5 @@ export async function requestData<T>(url: string): Promise<T> {
   const response = await fetch(`${BASE_URL}/${url}`);
 
   const data = await response.json();
-  return data.data;
+  return data;
 }
