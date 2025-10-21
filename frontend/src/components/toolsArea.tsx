@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { AiOutlineLayout } from "react-icons/ai";
 import { FaCrown } from "react-icons/fa";
 import { FiDownload } from "react-icons/fi";
@@ -8,6 +9,8 @@ import { MdWaterDrop } from "react-icons/md";
 import { RiChatSmile2Line } from "react-icons/ri";
 
 export const ToolsArea = () => {
+  const [templateMenu, setTemplateMenu] = useState(true);
+
   return (
     <div className="h-fit sticky top-6 flex flex-col w-40 rounded-sm drop-shadow-sm shadow-black bg-white">
       <div className="flex flex-row border-b py-2 border-slate-300 justify-between w-full">
@@ -42,7 +45,10 @@ export const ToolsArea = () => {
             Rearrange
           </span>
         </button>
-        <button className="flex group duration-700 gap-2 hover:text-purple-500/80 transition-all mx-auto py-2 flex-row">
+        <button
+          onClick={() => setTemplateMenu((t) => !t)}
+          className="flex group duration-700 gap-2 hover:text-purple-500/80 transition-all mx-auto py-2 flex-row"
+        >
           <span className="group-hover:bg-purple-500/40 duration-700 px-0.5 py-0.5 rounded-full transition-all">
             <AiOutlineLayout className="my-auto text-lg opacity-70" />
           </span>
